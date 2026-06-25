@@ -1,0 +1,36 @@
+name: Contrôle CI Django
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests obligatoires
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Vérifier la couleur de fond
+        run: python -m unittest tests.test_background_color -v
+
+      - name: Exécuter les tests Django
+        env:
+          DEBUG: "False"
+        run: python manage.py test -v 2
