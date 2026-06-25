@@ -33,7 +33,7 @@ python manage.py test
    git push origin test:main
    ```
 
-3. Dans **Settings → Branches → Add branch protection rule**, cibler `main`, activer **Require a pull request before merging** et **Require status checks to pass before merging**, puis sélectionner `Tests obligatoires`.
+3. Dans **Settings → Branches → Add branch protection rule**, cibler `main`, activer **Require a pull request before merging** et **Require status checks to pass before merging**, puis sélectionner le contrôle de statut `Tests obligatoires`. Si la vérification n’apparaît pas encore, créez d’abord une pull request vers `main` pour que GitHub exécute le workflow, puis rechargez la page de règle de protection.
 4. Dans Vercel, importer le dépôt, choisir la branche de production `main` et laisser Vercel utiliser `vercel.json`.
 5. Travailler uniquement sur `test`, pousser, puis ouvrir une pull request `test` → `main`.
 
